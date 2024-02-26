@@ -1,0 +1,74 @@
+body {
+    margin: 100px;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    font-family: "Namdhinggo", serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 50px;
+}
+
+h2 {
+    font-family: "Namdhinggo", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 35px;
+}
+
+p {
+    font-family: "Namdhinggo", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+}
+
+a {
+    font-family: inherit;
+    font-size: inherit;
+    text-decoration: solid;
+}
+
+#botrytis-timelapse {
+    display: flex; /* Enables flexbox */
+    justify-content: center; /* Centers the child horizontally */
+    align-items: center; /* Centers the child vertically */
+}
+
+#botrytis-timelapse img {
+    width: 50vw; /* Set the width to 80% of the viewport width */
+    height: auto; /* Scale the height accordingly to maintain the aspect ratio */
+    max-width: 100%; /* Ensures the image is not larger than the div */
+}
+
+.namdhinggo-regular {
+    font-family: "Namdhinggo", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .namdhinggo-medium {
+    font-family: "Namdhinggo", serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .namdhinggo-semibold {
+    font-family: "Namdhinggo", serif;
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  .namdhinggo-bold {
+    font-family: "Namdhinggo", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .namdhinggo-extrabold {
+    font-family: "Namdhinggo", serif;
+    font-weight: 800;
+    font-style: normal;
+  }
+  
