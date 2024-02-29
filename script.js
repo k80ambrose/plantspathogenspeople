@@ -179,7 +179,6 @@ function togglePopup(containerId) {
     }
 }
 
-// Add event listener for click
 canvas.addEventListener('click', function(event) {
     var rect = canvas.getBoundingClientRect();
     var clickX = event.clientX - rect.left;
@@ -192,18 +191,21 @@ canvas.addEventListener('click', function(event) {
 
     if (isClickOnLeg(clickX, clickY, triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight)) {
         // Blue leg
+        console.log('Blue leg clicked');
         toggleLegState('#70C1FF', triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + size / 4, triangleVerticalMargin + triangleHeight / 2, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight);
-        togglePopup('popup-container-blue');
+        togglePopup('popup-container-blue', popupVisible);
         legClicked = true;
     } else if (isClickOnLeg(clickX, clickY, triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight)) {
         // Green leg
+        console.log('Green leg clicked');
         toggleLegState('#B8BC8A', triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + 3 * size / 4, triangleVerticalMargin + triangleHeight / 2, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
-        togglePopup('popup-container-green');
+        togglePopup('popup-container-green', popupVisible);
         legClicked = true;
     } else if (isClickOnLeg(clickX, clickY, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight)) {
         // Pink leg
+        console.log('Pink leg clicked');
         toggleLegState('#FFA69E', triangleHorizontalMargin, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size / 2, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
-        togglePopup('popup-container-pink');
+        togglePopup('popup-container-pink', popupVisible);
         legClicked = true;
     }
 
@@ -212,16 +214,6 @@ canvas.addEventListener('click', function(event) {
         hideOtherPopups();
     }
 });
-
-// Function to hide other popups
-function hideOtherPopups() {
-    var popupContainers = document.getElementsByClassName('popup-container');
-    for (var i = 0; i < popupContainers.length; i++) {
-        popupContainers[i].style.display = 'none';
-    }
-}
-
-
 
 
 // Draw the "Disease Triangle" text

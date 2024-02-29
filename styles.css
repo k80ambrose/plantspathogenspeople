@@ -38,11 +38,7 @@ a {
 
 .popup-container {
   display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
+  position: absolute;
   border: 1px solid #ccc;
   padding: 20px;
   z-index: 1000;
@@ -57,6 +53,28 @@ a {
   top: 5px;
   right: 5px;
   cursor: pointer;
+}
+
+/* Individual styling for each colored popup */
+.popup-container-blue {
+  background-color: #70C1FF; /* Blue color */
+  left: 20px; /* Adjust position for blue popup */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%);
+}
+
+.popup-container-green {
+  background-color: #B8BC8A; /* Green color */
+  right: 20px; /* Adjust position for green popup */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%);
+}
+
+.popup-container-pink {
+  background-color: #FFA69E; /* Pink color */
+  bottom: 20px; /* Adjust position for pink popup */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%);
 }
 
 
