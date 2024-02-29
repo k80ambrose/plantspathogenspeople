@@ -21,7 +21,6 @@ ctx.fill();
 
 // Leg width proportional to triangle size
 var legWidth = size / 20;
-var legStates = { blue: false, green: false, pink: false };
 
 
 // Functions to check if a click is within the bounds of the legs
@@ -110,6 +109,8 @@ ctx.textAlign = 'center';
 ctx.textBaseline = 'middle';
 ctx.fillText("Disease Triangle", canvas.width / 2, canvas.height / 2 + triangleVerticalMargin / 2);
 
+
+// VIDEO STUFF
 var video = document.getElementById('disease-timelapse-video');
 
 // Function to play the video backwards
