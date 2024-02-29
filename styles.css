@@ -36,6 +36,30 @@ a {
   background-color: whitek;
 }
 
+.popup-container {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.popup-content {
+  position: relative;
+}
+
+.popup-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+
+
 #botrytis-timelapse {
     display: flex; /* Enables flexbox */
     justify-content: center; /* Centers the child horizontally */

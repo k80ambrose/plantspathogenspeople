@@ -7,7 +7,11 @@ var legStates = {
     green: false,
     pink: false
 };
-
+var popupVisible = {
+    blue: false,
+    green: false,
+    pink: false
+};
 
 // Clear the canvas
 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -61,13 +65,51 @@ ctx.lineTo(triangleHorizontalMargin + size, triangleVerticalMargin + triangleHei
 ctx.stroke();
 
 function toggleLegState(color, startX, startY, midX, midY, endX, endY) {
+    // Store the text before clearing the canvas
+    var diseaseText = "Disease Triangle";
+
+    // Clear the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Redraw the equilateral triangle
+    ctx.beginPath();
+    ctx.moveTo(triangleHorizontalMargin + size / 2, triangleVerticalMargin);
+    ctx.lineTo(triangleHorizontalMargin, triangleVerticalMargin + triangleHeight);
+    ctx.lineTo(triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
+    ctx.closePath();
+    ctx.fillStyle = 'lightgrey';
+    ctx.fill();
+
+    // Redraw the legs along the edges of the triangle
+    ctx.lineWidth = legWidth;
+
+    // Blue leg (left side)
+    ctx.strokeStyle = '#70C1FF';
+    ctx.beginPath();
+    ctx.moveTo(triangleHorizontalMargin + size / 2, triangleVerticalMargin);
+    ctx.lineTo(triangleHorizontalMargin, triangleVerticalMargin + triangleHeight);
+    ctx.stroke();
+
+    // Green leg (right side)
+    ctx.strokeStyle = '#B8BC8A';
+    ctx.beginPath();
+    ctx.moveTo(triangleHorizontalMargin + size / 2, triangleVerticalMargin);
+    ctx.lineTo(triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
+    ctx.stroke();
+
+    // Pink leg (bottom side)
+    ctx.strokeStyle = '#FFA69E';
+    ctx.beginPath();
+    ctx.moveTo(triangleHorizontalMargin, triangleVerticalMargin + triangleHeight);
+    ctx.lineTo(triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
+    ctx.stroke();
+
     // Determine which leg is being toggled
     var legKey = color === '#70C1FF' ? 'blue' : (color === '#B8BC8A' ? 'green' : 'pink');
 
     // Check if the leg is currently broken
     if (legStates[legKey]) {
         // If broken, repair the leg
-        ctx.globalCompositeOperation = 'source-over';
         ctx.beginPath();
         ctx.moveTo(startX, startY);
         ctx.lineTo(endX, endY);
@@ -84,6 +126,13 @@ function toggleLegState(color, startX, startY, midX, midY, endX, endY) {
         // Update the leg state to broken
         legStates[legKey] = true;
     }
+
+    // Redraw the text
+    ctx.font = fontSize + "px 'Namdhinggo', serif";
+    ctx.fillStyle = 'black';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(diseaseText, canvas.width / 2, canvas.height / 2 + triangleVerticalMargin / 2);
 }
      
 function breakLeg(color, startX, startY, midX, midY, endX, endY) {
@@ -119,18 +168,55 @@ canvas.addEventListener('click', function(event) {
     var clickX = event.clientX - rect.left;
     var clickY = event.clientY - rect.top;
 
-    // Check for clicks on each leg
+    // Track if a leg was clicked
+    var legClicked = false;
+
     if (isClickOnLeg(clickX, clickY, triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight)) {
         // Blue leg
         toggleLegState('#70C1FF', triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + size / 4, triangleVerticalMargin + triangleHeight / 2, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight);
+        togglePopup('popup-container-blue');
+        legClicked = true;
     } else if (isClickOnLeg(clickX, clickY, triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight)) {
         // Green leg
         toggleLegState('#B8BC8A', triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + 3 * size / 4, triangleVerticalMargin + triangleHeight / 2, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
+        togglePopup('popup-container-green');
+        legClicked = true;
     } else if (isClickOnLeg(clickX, clickY, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight)) {
         // Pink leg
         toggleLegState('#FFA69E', triangleHorizontalMargin, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size / 2, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
+        togglePopup('popup-container-pink');
+        legClicked = true;
+    }
+
+    // Hide other popups if a leg was clicked
+    if (legClicked) {
+        hideOtherPopups();
     }
 });
+
+// Function to toggle popup visibility
+function togglePopup(containerId) {
+    var popupContainer = document.getElementById(containerId);
+    if (popupVisible[containerId] === false) {
+        popupContainer.style.display = 'block';
+        popupVisible[containerId] = true;
+    } else {
+        popupContainer.style.display = 'none';
+        popupVisible[containerId] = false;
+    }
+}
+
+// Function to hide other popups
+function hideOtherPopups() {
+    var popupContainers = document.getElementsByClassName('popup-container');
+    for (var i = 0; i < popupContainers.length; i++) {
+        var containerId = popupContainers[i].id;
+        if (popupVisible[containerId] === true) {
+            popupContainers[i].style.display = 'none';
+            popupVisible[containerId] = false;
+        }
+    }
+}
 
 // Draw the "Disease Triangle" text
 var fontSize = 24; 
