@@ -7,11 +7,6 @@ var legStates = {
     green: false,
     pink: false
 };
-var popupVisible = {
-    blue: false,
-    green: false,
-    pink: false
-};
 
 // Clear the canvas
 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -162,11 +157,35 @@ function breakLeg(color, startX, startY, midX, midY, endX, endY) {
     ctx.stroke();
 }
 
+// Define popupVisible object
+var popupVisible = {
+    'popup-container-blue': false,
+    'popup-container-green': false,
+    'popup-container-pink': false
+};
+
+// Function to toggle popup visibility
+function togglePopup(containerId) {
+    var popupContainer = document.getElementById(containerId);
+    console.log('Toggling visibility for container:', containerId);
+    if (popupVisible[containerId] === false) {
+        popupContainer.style.display = 'block';
+        popupVisible[containerId] = true;
+        console.log('Popup container', containerId, 'is now visible');
+    } else {
+        popupContainer.style.display = 'none';
+        popupVisible[containerId] = false;
+        console.log('Popup container', containerId, 'is now hidden');
+    }
+}
+
 // Add event listener for click
 canvas.addEventListener('click', function(event) {
     var rect = canvas.getBoundingClientRect();
     var clickX = event.clientX - rect.left;
     var clickY = event.clientY - rect.top;
+
+    console.log('Canvas clicked at coordinates:', clickX, clickY);
 
     // Track if a leg was clicked
     var legClicked = false;
@@ -194,29 +213,16 @@ canvas.addEventListener('click', function(event) {
     }
 });
 
-// Function to toggle popup visibility
-function togglePopup(containerId) {
-    var popupContainer = document.getElementById(containerId);
-    if (popupVisible[containerId] === false) {
-        popupContainer.style.display = 'block';
-        popupVisible[containerId] = true;
-    } else {
-        popupContainer.style.display = 'none';
-        popupVisible[containerId] = false;
-    }
-}
-
 // Function to hide other popups
 function hideOtherPopups() {
     var popupContainers = document.getElementsByClassName('popup-container');
     for (var i = 0; i < popupContainers.length; i++) {
-        var containerId = popupContainers[i].id;
-        if (popupVisible[containerId] === true) {
-            popupContainers[i].style.display = 'none';
-            popupVisible[containerId] = false;
-        }
+        popupContainers[i].style.display = 'none';
     }
 }
+
+
+
 
 // Draw the "Disease Triangle" text
 var fontSize = 24; 
