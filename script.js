@@ -33,21 +33,21 @@ function isClickOnLeg(clickX, clickY, x1, y1, x2, y2) {
 ctx.lineWidth = legWidth;
 
 // Blue leg (left side)
-ctx.strokeStyle = 'blue';
+ctx.strokeStyle = '#70C1FF';
 ctx.beginPath();
 ctx.moveTo(triangleHorizontalMargin + size / 2, triangleVerticalMargin);
 ctx.lineTo(triangleHorizontalMargin, triangleVerticalMargin + triangleHeight);
 ctx.stroke();
 
 // Green leg (right side)
-ctx.strokeStyle = 'green';
+ctx.strokeStyle = '#B8BC8A';
 ctx.beginPath();
 ctx.moveTo(triangleHorizontalMargin + size / 2, triangleVerticalMargin);
 ctx.lineTo(triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
 ctx.stroke();
 
 // Pink leg (bottom side)
-ctx.strokeStyle = 'pink';
+ctx.strokeStyle = '#FFA69E';
 ctx.beginPath();
 ctx.moveTo(triangleHorizontalMargin, triangleVerticalMargin + triangleHeight);
 ctx.lineTo(triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
@@ -90,13 +90,13 @@ canvas.addEventListener('click', function(event) {
     // Check for clicks on each leg
     if (isClickOnLeg(clickX, clickY, triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight)) {
         // Blue leg
-        breakLeg('blue', triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + size / 4, triangleVerticalMargin + triangleHeight / 2, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight);
+        breakLeg('#70C1FF', triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + size / 4, triangleVerticalMargin + triangleHeight / 2, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight);
     } else if (isClickOnLeg(clickX, clickY, triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight)) {
         // Green leg
-        breakLeg('green', triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + 3 * size / 4, triangleVerticalMargin + triangleHeight / 2, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
+        breakLeg('#B8BC8A', triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + 3 * size / 4, triangleVerticalMargin + triangleHeight / 2, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
     } else if (isClickOnLeg(clickX, clickY, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight)) {
         // Pink leg
-        breakLeg('pink', triangleHorizontalMargin, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size / 2, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
+        breakLeg('#FFA69E', triangleHorizontalMargin, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size / 2, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
     }
 });
 
@@ -107,3 +107,28 @@ ctx.fillStyle = 'black';
 ctx.textAlign = 'center';
 ctx.textBaseline = 'middle';
 ctx.fillText("Disease Triangle", canvas.width / 2, canvas.height / 2 + triangleVerticalMargin / 2);
+
+var video = document.getElementById('disease-timelapse-video');
+
+// Function to play the video backwards
+function playBackwards() {
+  if (video.currentTime === 0) {
+    video.pause(); // Pause if it's already at the beginning
+  } else {
+    video.currentTime -= 0.1; // Move back in time
+    setTimeout(playBackwards, 30); // Adjust the timeout to control playback speed
+  }
+}
+
+// Add event listener to toggle video playback direction
+canvas.addEventListener('click', function(event) {
+  // You can incorporate checks here to see if a leg was clicked
+  // For simplicity, this will just toggle the playback direction
+  if (video.paused || video.playbackRate < 0) {
+    video.playbackRate = 1.0;
+    video.play();
+  } else {
+    video.pause();
+    playBackwards(); // Call the function to play backwards
+  }
+});
