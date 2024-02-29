@@ -30,6 +30,13 @@ a {
     text-decoration: solid;
 }
 
+#disease_triangle_container {
+  position: relative;
+  width: 300px; /* Adjust as needed */
+  height: 300px; /* Adjust as needed */
+  margin: auto; /* Center the container */
+}
+
 #botrytis-timelapse {
     display: flex; /* Enables flexbox */
     justify-content: center; /* Centers the child horizontally */
