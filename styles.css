@@ -42,12 +42,6 @@ a {
     align-items: center; /* Centers the child vertically */
 }
 
-#botrytis-timelapse img {
-    width: 50vw; /* Set the width to 80% of the viewport width */
-    height: auto; /* Scale the height accordingly to maintain the aspect ratio */
-    max-width: 100%; /* Ensures the image is not larger than the div */
-}
-
 .namdhinggo-regular {
     font-family: "Namdhinggo", serif;
     font-weight: 400;
