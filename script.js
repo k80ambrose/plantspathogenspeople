@@ -1,35 +1,43 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const canvas = document.getElementById('grapeCanvas');
-    const ctx = canvas.getContext('2d');
+var canvas = document.getElementById('disease-triangle-canvas');
+var ctx = canvas.getContext('2d');
+var size = canvas.width; // Assuming width and height are the same
+var triangleHeight = size * Math.sqrt(3) / 2; // Height of an equilateral triangle
 
-    function drawGrape(x, y, width, height) {
-        ctx.fillStyle = '#6A4C93'; // Grape color
-        ctx.beginPath();
-        ctx.save(); // Save the current state of the context
-        ctx.translate(x, y); // Translate to the grape's location
-        ctx.scale(width / height, 1); // Scale to make the grape ovular
-        ctx.arc(0, 0, height / 2, 0, Math.PI * 2); // Draw a circle
-        ctx.restore(); // Restore the context to unscaled state
-        ctx.fill();
-    }
+// Clear the canvas
+ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Coordinates and sizes for a bunch of grapes
-    const grapePositions = [
-        {x: 540, y: 260, width: 80, height: 60},
-        {x: 500, y: 210, width: 80, height: 60},
-        {x: 500, y: 310, width: 80, height: 60}, 
-        {x: 460, y: 290, width: 80, height: 60},
-        {x: 460, y: 260, width: 80, height: 60},
-        {x: 410, y: 330, width: 80, height: 60},
-        {x: 400, y: 250, width: 80, height: 60},
-        {x: 360, y: 320, width: 80, height: 60},
-        {x: 330, y: 290, width: 80, height: 60},
-        {x: 290, y: 330, width: 80, height: 60},
-        {x: 250, y: 350, width: 80, height: 60}
-    ];
+// Draw the equilateral triangle
+ctx.beginPath();
+ctx.moveTo(size / 2, size - triangleHeight); // Top point
+ctx.lineTo(size / 4, size); // Bottom left point
+ctx.lineTo(3 * size / 4, size); // Bottom right point
+ctx.closePath();
+ctx.fillStyle = 'lightgrey';
+ctx.fill();
 
-    // Draw each grape in the bunch
-    grapePositions.forEach(function(grape) {
-        drawGrape(grape.x, grape.y, grape.width, grape.height);
-    });
-});
+// Adjust leg length based on the triangle size
+var legLength = size / 3;
+
+// Draw the blue leg along the left edge
+ctx.beginPath();
+ctx.moveTo(size / 2, size - triangleHeight); // Top point
+ctx.lineTo(size / 4, size); // Bottom left point
+ctx.strokeStyle = 'blue';
+ctx.lineWidth = legLength / 10; // Width of the leg
+ctx.stroke();
+
+// Draw the green leg along the right edge
+ctx.beginPath();
+ctx.moveTo(size / 2, size - triangleHeight); // Top point
+ctx.lineTo(3 * size / 4, size); // Bottom right point
+ctx.strokeStyle = 'green';
+ctx.lineWidth = legLength / 10; // Width of the leg
+ctx.stroke();
+
+// Draw the pink leg along the bottom edge
+ctx.beginPath();
+ctx.moveTo(size / 4, size); // Bottom left point
+ctx.lineTo(3 * size / 4, size); // Bottom right point
+ctx.strokeStyle = 'pink';
+ctx.lineWidth = legLength / 10; // Width of the leg
+ctx.stroke();

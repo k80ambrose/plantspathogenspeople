@@ -30,11 +30,10 @@ a {
     text-decoration: solid;
 }
 
-#disease_triangle_container {
-  position: relative;
-  width: 300px; /* Adjust as needed */
-  height: 300px; /* Adjust as needed */
-  margin: auto; /* Center the container */
+#disease-triangle-canvas {
+  display: block;
+  margin: auto;
+  background-color: black;
 }
 
 #botrytis-timelapse {
