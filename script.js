@@ -23,10 +23,6 @@ ctx.fill();
 var legWidth = size / 20;
 var legStates = { blue: false, green: false, pink: false };
 
-function toggleLegState(color) {
-    legStates[color] = !legStates[color]; // Toggle the state
-}
-
 
 // Functions to check if a click is within the bounds of the legs
 function isClickOnLeg(clickX, clickY, x1, y1, x2, y2) {
@@ -93,17 +89,18 @@ canvas.addEventListener('click', function(event) {
     var clickX = event.clientX - rect.left;
     var clickY = event.clientY - rect.top;
 
-    // Determine which leg is clicked and toggle its broken state
+    // Check for clicks on each leg
     if (isClickOnLeg(clickX, clickY, triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight)) {
-        toggleLegState('blue');
+        // Blue leg
+        breakLeg('#70C1FF', triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + size / 4, triangleVerticalMargin + triangleHeight / 2, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight);
     } else if (isClickOnLeg(clickX, clickY, triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight)) {
-        toggleLegState('green');
+        // Green leg
+        breakLeg('#B8BC8A', triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + 3 * size / 4, triangleVerticalMargin + triangleHeight / 2, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
     } else if (isClickOnLeg(clickX, clickY, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight)) {
-        toggleLegState('pink');
+        // Pink leg
+        breakLeg('#FFA69E', triangleHorizontalMargin, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size / 2, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
     }
-    redrawLegs(); // Redraw legs based on their current state
 });
-
 
 // Draw the "Disease Triangle" text
 var fontSize = 24; 
@@ -137,38 +134,3 @@ canvas.addEventListener('click', function(event) {
     playBackwards(); // Call the function to play backwards
   }
 });
-
-function redrawLegs() {
-    // Clear and redraw the triangle
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.beginPath();
-    ctx.moveTo(triangleHorizontalMargin + size / 2, triangleVerticalMargin);
-    ctx.lineTo(triangleHorizontalMargin, triangleVerticalMargin + triangleHeight);
-    ctx.lineTo(triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
-    ctx.closePath();
-    ctx.fillStyle = 'lightgrey';
-    ctx.fill();
-    
-    // Redraw each leg based on its state
-    Object.keys(legStates).forEach(function(leg) {
-        var color = leg === 'blue' ? '#70C1FF' : (leg === 'green' ? '#B8BC8A' : '#FFA69E');
-        var startX = triangleHorizontalMargin + size / 2, startY = triangleVerticalMargin;
-        var endX = leg === 'blue' ? triangleHorizontalMargin : (leg === 'green' ? triangleHorizontalMargin + size : triangleHorizontalMargin + size / 2);
-        var endY = leg === 'pink' ? triangleVerticalMargin + triangleHeight : triangleVerticalMargin + triangleHeight;
-        var midX = (startX + endX) / 2, midY = (startY + endY) / 2;
-        
-        if (legStates[leg]) {
-            breakLeg(color, startX, startY, midX, midY, endX, endY);
-        } else {
-            drawLeg(color, startX, startY, endX, endY);
-        }
-    });
-    
-    // Redraw the "Disease Triangle" text
-    ctx.font = fontSize + "px 'Namdhinggo', serif"; 
-    ctx.fillStyle = 'black';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText("Disease Triangle", canvas.width / 2, canvas.height / 2 + triangleVerticalMargin / 2);
-}
-redrawLegs(); // Call this initially to draw the legs
