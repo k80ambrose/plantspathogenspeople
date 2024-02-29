@@ -2,6 +2,12 @@ var canvas = document.getElementById('disease-triangle-canvas');
 var ctx = canvas.getContext('2d');
 var size = Math.min(canvas.width, canvas.height) - 60; // Subtract a bit to fit the stroke
 var triangleHeight = size * (Math.sqrt(3) / 2); // Height of an equilateral triangle
+var legStates = {
+    blue: false, // false means unbroken, true means broken
+    green: false,
+    pink: false
+};
+
 
 // Clear the canvas
 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -54,7 +60,32 @@ ctx.moveTo(triangleHorizontalMargin, triangleVerticalMargin + triangleHeight);
 ctx.lineTo(triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
 ctx.stroke();
 
-// Break leg function
+function toggleLegState(color, startX, startY, midX, midY, endX, endY) {
+    // Determine which leg is being toggled
+    var legKey = color === '#70C1FF' ? 'blue' : (color === '#B8BC8A' ? 'green' : 'pink');
+
+    // Check if the leg is currently broken
+    if (legStates[legKey]) {
+        // If broken, repair the leg
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(endX, endY);
+        ctx.lineWidth = legWidth;
+        ctx.strokeStyle = color;
+        ctx.stroke();
+
+        // Update the leg state to unbroken
+        legStates[legKey] = false;
+    } else {
+        // If unbroken, break the leg
+        breakLeg(color, startX, startY, midX, midY, endX, endY); // Call breakLeg here
+
+        // Update the leg state to broken
+        legStates[legKey] = true;
+    }
+}
+     
 function breakLeg(color, startX, startY, midX, midY, endX, endY) {
     // Clear the leg
     ctx.globalCompositeOperation = 'destination-out';
@@ -91,13 +122,13 @@ canvas.addEventListener('click', function(event) {
     // Check for clicks on each leg
     if (isClickOnLeg(clickX, clickY, triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight)) {
         // Blue leg
-        breakLeg('#70C1FF', triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + size / 4, triangleVerticalMargin + triangleHeight / 2, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight);
+        toggleLegState('#70C1FF', triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + size / 4, triangleVerticalMargin + triangleHeight / 2, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight);
     } else if (isClickOnLeg(clickX, clickY, triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight)) {
         // Green leg
-        breakLeg('#B8BC8A', triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + 3 * size / 4, triangleVerticalMargin + triangleHeight / 2, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
+        toggleLegState('#B8BC8A', triangleHorizontalMargin + size / 2, triangleVerticalMargin, triangleHorizontalMargin + 3 * size / 4, triangleVerticalMargin + triangleHeight / 2, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
     } else if (isClickOnLeg(clickX, clickY, triangleHorizontalMargin, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight)) {
         // Pink leg
-        breakLeg('#FFA69E', triangleHorizontalMargin, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size / 2, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
+        toggleLegState('#FFA69E', triangleHorizontalMargin, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size / 2, triangleVerticalMargin + triangleHeight, triangleHorizontalMargin + size, triangleVerticalMargin + triangleHeight);
     }
 });
 
