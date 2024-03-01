@@ -72,7 +72,7 @@ a {
 }
 
 .popup-content p {
-  font-size: 12px; /* Custom font size for p */
+  font-size: 15px; /* Custom font size for p */
 }
 
 
@@ -98,7 +98,7 @@ a {
 
 .popup-container-pink {
   background-color: #FFA69E; /* Pink color */
-  bottom: -140px; /* Adjust position for pink popup */
+  bottom: -150px; /* Adjust position for pink popup */
   left: 50%; /* Center horizontally */
   transform: translateX(-50%);
 }
@@ -140,3 +140,8 @@ a {
     font-style: normal;
   }
   
+  .moldy-canvas{
+    height: 100vh;
+    width: 100vw;
+    z-index: 2000;
+}
