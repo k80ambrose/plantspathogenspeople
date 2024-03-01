@@ -11,37 +11,35 @@
 <body></body>
     <h1>Botrytis Cinerea</h1>
         <p>Botrytis Cinerea, commonly known as gray mold, is a fungal pathogen that significantly affects global agriculture, impacting a wide variety of host crops at various stages of growth.</p>
-    <div id="botrytis-timelapse">
-        <video id="disease-timelapse-video" width="320" height="240" loop autoplay muted>
-            <source src="assets/video/rot.mp4" type="video/mp4">
-        </video>
-          
-    </div>
+        <div id="thebigone">
+            <div id="botrytis-timelapse">
+                <video id="disease-timelapse-video" width="320" height="240" loop autoplay muted>
+                    <source src="assets/video/rot.mp4" type="video/mp4">
+                </video>
+            </div>
+            <canvas id="disease-triangle-canvas" width="400" height="400"></canvas>
+            <div id="popup-container-blue" class="popup-container popup-container-blue">
+                <div class="popup-content">
+                    <span class="popup-close" onclick="togglePopup('popup-container-blue')">x</span>
+                    <p>Blue is virulent pathogen</p>
+                </div>
+            </div>
+            <div id="popup-container-green" class="popup-container popup-container-green">
+                <div class="popup-content">
+                    <span class="popup-close" onclick="togglePopup('popup-container-green')">x</span>
+                    <p>Green is conducive environment</p>
+                </div>
+            </div>
+            <div id="popup-container-pink" class="popup-container popup-container-pink">
+                <div class="popup-content">
+                    <span class="popup-close" onclick="togglePopup('popup-container-pink')">x</span>
+                    <p>Pink is susceptible host</p>
+                </div>
+            </div>
+        </div>
+        
+    
 
-    <canvas id="disease-triangle-canvas" width="400" height="400"></canvas>
-    
-    <canvas id="disease-triangle-canvas" width="400" height="400"></canvas>
-
-    <div id="popup-container-blue" class="popup-container popup-container-blue">
-        <div class="popup-content">
-            <span class="popup-close" onclick="togglePopup('popup-container-blue')">x</span>
-            <p>Blue is virulent pathogen</p>
-        </div>
-    </div>
-    
-    <div id="popup-container-green" class="popup-container popup-container-green">
-        <div class="popup-content">
-            <span class="popup-close" onclick="togglePopup('popup-container-green')">x</span>
-            <p>Green is conducive environment</p>
-        </div>
-    </div>
-    
-    <div id="popup-container-pink" class="popup-container popup-container-pink">
-        <div class="popup-content">
-            <span class="popup-close" onclick="togglePopup('popup-container-pink')">x</span>
-            <p>Pink is susceptible host</p>
-        </div>
-    </div>
     
     
 

@@ -1,5 +1,6 @@
 body {
     margin: 200px;
+    margin-top: 50px;
     background-color: #f0f0f0;
 }
 
@@ -30,19 +31,32 @@ a {
     text-decoration: solid;
 }
 
+#thebigone {
+  position: relative;
+}
+
 #disease-triangle-canvas {
   display: block;
   margin: auto;
-  background-color: whitek;
+  background-color: #f0f0f0;
 }
 
 .popup-container {
   display: none;
   position: absolute;
-  border: 1px solid #ccc;
+  border: none; /* Remove border */
   padding: 20px;
   z-index: 1000;
+  border-radius: 10px; /* Add rounded edges */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add slight shadow */
+  animation: fadeIn 0.5s ease-in-out; /* Add fade in and fade out animation */
 }
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 
 .popup-content {
   position: relative;
@@ -58,30 +72,31 @@ a {
 /* Individual styling for each colored popup */
 .popup-container-blue {
   background-color: #70C1FF; /* Blue color */
-  left: 20px; /* Adjust position for blue popup */
+  left: -100px; /* Adjust position for blue popup */
   top: 50%; /* Center vertically */
   transform: translateY(-50%);
 }
 
 .popup-container-green {
   background-color: #B8BC8A; /* Green color */
-  right: 20px; /* Adjust position for green popup */
+  right: -100px; /* Adjust position for green popup */
   top: 50%; /* Center vertically */
   transform: translateY(-50%);
 }
 
 .popup-container-pink {
   background-color: #FFA69E; /* Pink color */
-  bottom: 20px; /* Adjust position for pink popup */
+  bottom: -100px; /* Adjust position for pink popup */
   left: 50%; /* Center horizontally */
   transform: translateX(-50%);
 }
 
 
 #botrytis-timelapse {
-    display: flex; /* Enables flexbox */
-    justify-content: center; /* Centers the child horizontally */
-    align-items: center; /* Centers the child vertically */
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin: 10px;
 }
 
 .namdhinggo-regular {
