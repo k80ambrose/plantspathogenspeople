@@ -215,7 +215,6 @@ canvas.addEventListener('click', function(event) {
     }
 });
 
-
 // Draw the "Disease Triangle" text
 var fontSize = 24; 
 ctx.font = fontSize + "px 'Namdhinggo', serif"; 
