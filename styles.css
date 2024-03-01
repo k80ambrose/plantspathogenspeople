@@ -2,6 +2,7 @@ body {
     margin: 200px;
     margin-top: 50px;
     background-color: #f0f0f0;
+    color: #363635;
 }
 
 h1 {
@@ -39,6 +40,8 @@ a {
   display: block;
   margin: auto;
   background-color: #f0f0f0;
+  cursor: pointer;
+  margin-bottom: 100px;
 }
 
 .popup-container {
@@ -82,16 +85,14 @@ a {
 /* Individual styling for each colored popup */
 .popup-container-blue {
   background-color: #70C1FF; /* Blue color */
-  left: -100px; /* Adjust position for blue popup */
-  top: 50%; /* Center vertically */
-  transform: translateY(-50%);
+  left: -150px; /* Adjust position for blue popup */
+  top: 300px;
 }
 
 .popup-container-green {
   background-color: #B8BC8A; /* Green color */
-  right: -100px; /* Adjust position for green popup */
-  top: 50%; /* Center vertically */
-  transform: translateY(-50%);
+  right: -150px; /* Adjust position for green popup */
+  top: 300px;
 }
 
 .popup-container-pink {
